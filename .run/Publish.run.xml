@@ -1,0 +1,10 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Publish" type="CompoundRunConfigurationType">
+    <toRun name="Publish (linux-musl-x64)" type="DotNetFolderPublish" />
+    <toRun name="Publish (linux-x64)" type="DotNetFolderPublish" />
+    <toRun name="Publish (osx-arm64)" type="DotNetFolderPublish" />
+    <toRun name="Publish (osx-x64)" type="DotNetFolderPublish" />
+    <toRun name="Publish (win-x64)" type="DotNetFolderPublish" />
+    <method v="2" />
+  </configuration>
+</component>
