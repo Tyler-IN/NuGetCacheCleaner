@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Version>0.0.0-pre+adc10eb</Version>
+    <Version>1.0.0-pre1+006797e</Version>
     <VersionPrefix>$(Version.Split('-')[0])</VersionPrefix>
     <VersionSuffix Condition="$(Version.Contains('-'))">-$(Version.Split('-')[1])</VersionSuffix>
     <Nullable>enable</Nullable>
@@ -26,26 +26,26 @@
   </Target>
   <Target Name="UpdateVersionFromGit" DependsOnTargets="InstallGitHooks" BeforeTargets="$(MSBuildProjectDefaultTargets);BeforeClean;Clean;BeforeBuild;Build;BuiltProjectOutputGroup;CollectFrameworkReferences;CollectUpToDateCheckInputDesignTime;CompileDesignTime;ResolveAssemblyReferences;ResolveAssemblyReferencesDesignTime">
     <Message Text="Updating version from git..." Importance="high" />
-    <Exec Command="git describe --tags --abbrev=0" ConsoleToMsBuild="true" EchoOff="true" StandardOutputImportance="low" ContinueOnError="true">
-      <Output TaskParameter="ConsoleOutput" PropertyName="VersionTag" />
+    <Exec Command="git describe --tags" ConsoleToMsBuild="true" EchoOff="true" StandardOutputImportance="low" ContinueOnError="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="GitDescription" />
       <Output TaskParameter="ExitCode" PropertyName="GitExitCode" />
     </Exec>
     <PropertyGroup>
-      <VersionTag Condition="'$(GitExitCode)' != '0'">v0.0.0</VersionTag>
+      <!-- defaults -->
+      <VersionTag>v0.0.0</VersionTag>
+      <CommitsSinceTag />
     </PropertyGroup>
-    <Exec Command="git rev-list --count $(VersionTag)" ConsoleToMsBuild="true" EchoOff="true" StandardOutputImportance="low" Condition="'$(GitExitCode)' == '0'">
-      <Output TaskParameter="ConsoleOutput" PropertyName="CommitsSinceTag" />
-    </Exec>
-    <PropertyGroup Condition="'$(GitExitCode)' != '0'">
+    <PropertyGroup Condition="'$(GitExitCode)' == '0'">
+      <VersionTag>$(GitDescription.Split('-')[0])</VersionTag>
+      <CommitsSinceTag Condition="$(GitDescription.Contains('-'))">$(GitDescription.Split('-')[1])</CommitsSinceTag>
     </PropertyGroup>
     <Exec Command="git rev-parse --short HEAD" ConsoleToMsBuild="true" EchoOff="true" StandardOutputImportance="low">
       <Output TaskParameter="ConsoleOutput" PropertyName="CommitHash" />
     </Exec>
     <PropertyGroup>
       <VersionPrefix>$(VersionTag.TrimStart('v'))</VersionPrefix>
-      <!-- if CommitsSinceTag is not 0, prefix with -pre -->
       <VersionSuffix>+$(CommitHash)</VersionSuffix>
-      <VersionSuffix Condition="'$(CommitsSinceTag)' != '0'">-pre$(CommitsSinceTag)+$(CommitHash)</VersionSuffix>
+      <VersionSuffix Condition="'$(CommitsSinceTag)'!='' and '$(CommitsSinceTag)'!='0'">-pre$(CommitsSinceTag)+$(CommitHash)</VersionSuffix>
       <Version>$(VersionPrefix)$(VersionSuffix)</Version>
       <PackageVersion>$(Version)</PackageVersion>
     </PropertyGroup>
