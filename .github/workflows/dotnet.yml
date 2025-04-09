@@ -115,7 +115,7 @@ jobs:
           echo "${hash}"
       - name: Restore
         if: always()
-        run: dotnet restore -p:Configuration=Release
+        run: dotnet restore -p:Configuration=Release *.sln
       - name: Hash NuPkg Cache After Restore
         id: updated-cache-hash
         run: |
@@ -165,9 +165,9 @@ jobs:
             C:/Users/runneradmin/AppData/Local/NuGet/v3-cache
             C:/Users/runneradmin/AppData/Local/NuGet/Cache
       - name: Build
-        run: dotnet build -c Release --no-restore
+        run: dotnet build -c Release --no-restore *.sln
       - name: Test
-        run: dotnet test -c Release --no-build --verbosity normal
+        run: dotnet test -c Release --no-build --verbosity normal *.sln
       - name: Push Artifact
         uses: actions/upload-artifact@v4.6.2
         with:
