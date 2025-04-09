@@ -6,11 +6,42 @@
         <LangVersion>12</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+
+        <ToolCommandName>nuget-cc</ToolCommandName>
+        <PackAsTool>true</PackAsTool>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageOutputPath>$(SolutionDir)artifacts</PackageOutputPath>
+        <ApplicationIcon>../icon.ico</ApplicationIcon>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Title>NuGet Cache Cleaner</Title>
+        <Description>A tool for cleaning up your local NuGet package cache.</Description>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <PackageDescription>A tool for cleaning up your local NuGet package cache.</PackageDescription>
+        <PackageTags>NuGet, Cache, Cleaner</PackageTags>
+        <Authors>"Tyler Young" &lt;tyler@impromptu.ninja&gt;;"Immo Landwerth" &lt;immol@microsoft.com&gt;;"Morten Nielsen"</Authors>
+        <Copyright>Copyright © 2025 Tyler Young</Copyright>
+
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageProjectUrl>https://github.com/Tyler-IN/NuGetCacheCleaner/</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Tyler-IN/NuGetCacheCleaner.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Mono.Options" Version="6.12.0.148" />
       <PackageReference Include="NuGet.Versioning" Version="6.13.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="" Visible="false"/>
+        <None Include="..\icon.png" Pack="true" PackagePath="" Visible="false"/>
     </ItemGroup>
 
 </Project>

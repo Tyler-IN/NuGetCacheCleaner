@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Version>0.0.0-pre+2782fe1</Version>
+    <Version>0.0.0-pre+adc10eb</Version>
     <VersionPrefix>$(Version.Split('-')[0])</VersionPrefix>
     <VersionSuffix Condition="$(Version.Contains('-'))">-$(Version.Split('-')[1])</VersionSuffix>
     <Nullable>enable</Nullable>
