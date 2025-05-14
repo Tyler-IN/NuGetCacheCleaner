@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -36,7 +36,7 @@
 
     <ItemGroup>
       <PackageReference Include="Mono.Options" Version="6.12.0.148" />
-      <PackageReference Include="NuGet.Versioning" Version="6.13.2" />
+      <PackageReference Include="NuGet.Versioning" Version="6.14.0" />
     </ItemGroup>
 
     <ItemGroup>
